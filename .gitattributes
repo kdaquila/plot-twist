@@ -1,2 +1,5 @@
 # Normalize line endings: LF in the repo and in working copies on every platform.
 * text=auto eol=lf
+
+# Test fixtures must keep their exact bytes (CRLF, BOM, Latin-1).
+fixtures/csv/** -text
