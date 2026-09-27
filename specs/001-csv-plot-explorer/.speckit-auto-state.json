@@ -1,7 +1,7 @@
 {
   "feature_directory": "specs/001-csv-plot-explorer",
-  "status": "in_progress",
-  "current_stage": "pr",
+  "status": "done",
+  "current_stage": "done",
   "completed_stages": [
     "specify",
     "clarify",
@@ -153,6 +153,11 @@
       "stage": "converge",
       "at": "2026-09-27T22:05:58Z",
       "note": "converged (cycle 2)"
+    },
+    {
+      "stage": "pr",
+      "at": "2026-09-27T22:06:32Z",
+      "note": "opened https://github.com/kdaquila/plot-twist/pull/1"
     }
   ]
 }
