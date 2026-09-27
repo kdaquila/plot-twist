@@ -1,14 +1,15 @@
 {
   "feature_directory": "specs/001-csv-plot-explorer",
   "status": "in_progress",
-  "current_stage": "implement",
+  "current_stage": "converge",
   "completed_stages": [
     "specify",
     "clarify",
     "plan",
     "checklist",
     "tasks",
-    "analyze"
+    "analyze",
+    "implement"
   ],
   "converge_cycle": 0,
   "pending_findings": [
@@ -131,6 +132,11 @@
       "stage": "analyze-findings",
       "at": "2026-09-27T02:35:00Z",
       "note": "D1 -> constitution 1.0.2; C2 -> SC-005/006 removed"
+    },
+    {
+      "stage": "implement",
+      "at": "2026-09-27T22:03:59Z",
+      "note": "T001-T063 done. Gates green (fmt, clippy, cargo test, npm check). Perf release: load 0.51s, view 14ms, mem 0.84x. Startup median 1.09s. GUI verified via CDP: box/wheel zoom, reset, hover, legend toggle, bad-cell dialog, API errors/notices, recent-file removal, theme; 60 fps at 1M rows x 3 series."
     }
   ]
 }

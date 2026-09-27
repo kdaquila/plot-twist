@@ -21,6 +21,9 @@ Plain HTTP + JSON, bound to `127.0.0.1` only. Base URL `http://127.0.0.1:<port>/
 - Success: `200`. Client error: `400` (bad request shape), `404` (unknown dataset or
   column), `409` (stale dataset / load in progress), `422` (load or plot failure described
   by the file or request contents). Server fault: `500`.
+- Requests whose `Host` header is not `127.0.0.1:<port>` or `localhost:<port>` are refused
+  with `403` (`BAD_REQUEST`), so web pages cannot reach the API through DNS rebinding.
+  Unknown paths return `404` (`BAD_REQUEST`).
 - Every non-2xx body is an **ErrorReport**:
 
 ```json

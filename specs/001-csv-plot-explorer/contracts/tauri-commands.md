@@ -15,13 +15,15 @@ in `ui/src/backend/generated/`. Failures reject with an `ErrorReport`
 | `get_settings` | — | `Settings` | — (app preference, not a data op) |
 | `set_theme` | `{ theme }` | `Settings` | — |
 | `remove_recent_file` | `{ path }` | `Settings` | — |
+| `get_api_status` | — | `ApiStatus \| null` (null until the API has started or failed) | — (app status) |
+| `frontend_ready` | — | — | — (window rendered its first frame; startup check, SC-003) |
 
 ## Events (backend → GUI)
 
 | Event | Payload | Purpose |
 |-------|---------|---------|
 | `session-changed` | `SessionEvent` | Any state change from any client; GUI refreshes and, for `origin: "api"`, shows API-triggered errors/warnings (FR-015, FR-016). |
-| `api-status` | `{ base_url } \| { error: ErrorReport }` | Shown in the status bar so users can see where the API is listening. |
+| `api-status` | `ApiStatus` = `{ base_url } \| { error: ErrorReport }` | Shown in the status bar so users can see where the API is listening. Also readable with `get_api_status`, so a window that subscribes late still gets it. |
 
 ## Binary ViewPayload layout (little-endian)
 

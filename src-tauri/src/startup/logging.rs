@@ -10,6 +10,8 @@ use super::paths;
 pub fn init() -> Option<WorkerGuard> {
     let filter =
         EnvFilter::try_from_env("PLOT_TWIST_LOG").unwrap_or_else(|_| EnvFilter::new("info"));
+    // The appender only lists the folder to prune old files; it must exist first.
+    let _ = std::fs::create_dir_all(paths::logs_dir());
     let appender = Builder::new()
         .rotation(Rotation::DAILY)
         .filename_prefix("plot-twist")

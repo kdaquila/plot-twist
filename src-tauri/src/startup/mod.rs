@@ -1,13 +1,17 @@
 //! App startup: logging, single instance, session, event forwarding, local API.
 
+mod api;
 mod logging;
 mod paths;
+pub mod ready;
+
+pub use api::ApiState;
 
 use std::sync::Arc;
 
 use plot_twist_core::session::Session;
 use plot_twist_core::settings::SettingsStore;
-use tauri::{App, Manager};
+use tauri::{App, Manager, RunEvent};
 
 use crate::{commands, events};
 
@@ -32,10 +36,16 @@ pub fn run() {
             commands::settings::get_settings,
             commands::settings::set_theme,
             commands::settings::remove_recent_file,
+            commands::app::get_api_status,
+            commands::app::frontend_ready,
         ])
         .build(tauri::generate_context!());
     match built {
-        Ok(app) => app.run(|_, _| {}),
+        Ok(app) => app.run(|app, event| {
+            if let RunEvent::Exit = event {
+                app.state::<ApiState>().stop();
+            }
+        }),
         Err(error) => tracing::error!(%error, "could not start plot-twist"),
     }
 }
@@ -44,6 +54,7 @@ fn setup(app: &mut App) {
     tracing::info!(version = env!("CARGO_PKG_VERSION"), "starting");
     let session = Arc::new(Session::new(SettingsStore::open(paths::settings_file())));
     events::forward_session_events(app.handle().clone(), &session);
+    api::start(app.handle(), Arc::clone(&session));
     app.manage(session);
 }
 

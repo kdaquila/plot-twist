@@ -19,7 +19,7 @@ plot-twist-api = { version = "0.1.0", path = "../crates/api" }
 plot-twist-core = { version = "0.1.0", path = "../crates/core" }
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.151"
-tauri = "2.12.0"
+tauri = { version = "2.12.0", features = [] }
 tauri-plugin-dialog = "2.8.0"
 tauri-plugin-single-instance = "2.5.0"
 tokio = { version = "1.53.1", features = ["rt-multi-thread", "sync"] }
@@ -28,4 +28,4 @@ tracing-appender = "0.2.5"
 tracing-subscriber = { version = "0.3.23", features = ["json", "env-filter"] }
 
 [build-dependencies]
-tauri-build = "2.7.0"
+tauri-build = { version = "2.7.0", features = [] }

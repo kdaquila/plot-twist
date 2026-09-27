@@ -1,0 +1,230 @@
+.app {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "toolbar toolbar"
+    "messages messages"
+    "panel plot"
+    "status status";
+  height: 100vh;
+}
+
+.app.dropping::after {
+  content: "Drop a file to open it";
+  position: fixed;
+  inset: 8px;
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--box);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.toolbar {
+  grid-area: toolbar;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.toolbar .spacer {
+  flex: 1;
+}
+
+.toolbar label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+}
+
+.menu {
+  position: relative;
+}
+
+.menu > summary {
+  list-style: none;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.menu > ul {
+  position: absolute;
+  z-index: 10;
+  margin: 4px 0 0;
+  padding: 4px;
+  list-style: none;
+  min-width: 320px;
+  max-width: 560px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+.menu > ul button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.messages {
+  grid-area: messages;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 12px;
+}
+
+.message {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.message.error {
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+}
+
+.message.notice {
+  background: var(--notice-bg);
+  color: var(--notice-fg);
+}
+
+.message .body {
+  flex: 1;
+}
+
+.message .hint {
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.data-panel {
+  grid-area: panel;
+  overflow: auto;
+  padding: 12px;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+}
+
+.data-panel h2 {
+  font-size: 15px;
+  margin: 0 0 4px;
+  overflow-wrap: anywhere;
+}
+
+.data-panel .meta {
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.data-panel fieldset {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0 0 12px;
+  padding: 8px 10px;
+}
+
+.data-panel legend {
+  color: var(--muted);
+  padding: 0 4px;
+}
+
+.data-panel .column-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.data-panel .column-row .name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-panel .tag {
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.data-panel .warning {
+  background: var(--warning-bg);
+  color: var(--warning-fg);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+}
+
+.data-panel .empty {
+  color: var(--muted);
+}
+
+.plot-area-wrapper {
+  grid-area: plot;
+  min-width: 0;
+  min-height: 0;
+}
+
+.status-bar {
+  grid-area: status;
+  display: flex;
+  gap: 16px;
+  padding: 4px 12px;
+  color: var(--muted);
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.status-bar .spacer {
+  flex: 1;
+}
+
+dialog {
+  background: var(--panel);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: min(720px, 90vw);
+}
+
+dialog table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+dialog th,
+dialog td {
+  text-align: left;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+dialog .pager {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 8px;
+}

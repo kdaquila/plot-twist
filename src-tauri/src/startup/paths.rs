@@ -22,3 +22,7 @@ pub fn local_dir() -> PathBuf {
 pub fn logs_dir() -> PathBuf {
     local_dir().join("logs")
 }
+
+pub fn api_discovery_file() -> PathBuf {
+    local_dir().join("api.json")
+}

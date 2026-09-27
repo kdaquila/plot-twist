@@ -37,3 +37,12 @@ pub enum SessionEvent {
         origin: Origin,
     },
 }
+
+/// Whether the local API is serving; sent to the GUI as `api-status` (FR-005c).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, TS)]
+#[serde(untagged)]
+#[ts(export)]
+pub enum ApiStatus {
+    Running { base_url: String },
+    Failed { error: ErrorReport },
+}

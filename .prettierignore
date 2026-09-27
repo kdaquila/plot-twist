@@ -9,3 +9,4 @@ specs/
 .claude/
 package-lock.json
 *.md
+ui/src/backend/generated/

@@ -74,6 +74,18 @@ pub enum PtError {
 }
 
 impl PtError {
+    /// Logs an unexpected fault and returns an `INTERNAL` error carrying its log id.
+    pub fn internal(error: &dyn std::fmt::Display) -> Self {
+        let log_id = format!(
+            "{:x}",
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map_or(0, |d| d.as_nanos())
+        );
+        tracing::error!(%log_id, %error, "internal error");
+        Self::Internal { log_id }
+    }
+
     /// Stable, machine-readable code.
     pub fn code(&self) -> &'static str {
         match self {

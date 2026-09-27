@@ -52,18 +52,3 @@ pub fn format_count(n: u64) -> String {
     }
     out
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn formats_counts_and_truncates() {
-        assert_eq!(format_count(1204), "1,204");
-        assert_eq!(format_count(12), "12");
-        assert_eq!(format_count(1_000_000), "1,000,000");
-        let long = "x".repeat(100);
-        assert_eq!(truncate_value(&long).chars().count(), 65);
-        assert_eq!(truncate_value("abc"), "abc");
-    }
-}

@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use tokio::sync::broadcast;
 use ts_rs::TS;
 
-pub use events::{Origin, SessionEvent};
+pub use events::{ApiStatus, Origin, SessionEvent};
 pub use plot::{PlotConfig, PlotStyle};
 
 use crate::csv_import::import_file;
