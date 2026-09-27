@@ -26,6 +26,9 @@ export const DARK_PALETTE = [
 
 export const LIGHT_PLOT_BACKGROUND = "#ffffff";
 export const DARK_PLOT_BACKGROUND = "#16191f";
+/** Gridline colors; keep in sync with `--grid` in `app/theme.css`. */
+export const LIGHT_GRID = "#eceef2";
+export const DARK_GRID = "#252a33";
 
 export interface SeriesStyle {
   color: string;

@@ -7,6 +7,7 @@ import type { PlotConfig } from "../backend/generated/PlotConfig";
 import { Axis } from "./axes/Axis";
 import { HoverTooltip } from "./HoverTooltip";
 import { Legend } from "./legend/Legend";
+import { DARK_GRID, LIGHT_GRID } from "./legend/palette";
 import { usePlotController } from "./usePlotController";
 import "./plot.css";
 
@@ -31,7 +32,8 @@ export function PlotView({ dataset, plot, dark, showFps, onError }: Props) {
   }
 
   useEffect(() => {
-    const gridColor = getComputedStyle(document.documentElement).getPropertyValue("--grid").trim();
+    // From the theme itself: the document's theme attribute may not be updated yet.
+    const gridColor = dark ? DARK_GRID : LIGHT_GRID;
     controllerRef.current?.update({ dataset, plot, hidden, dark, gridColor });
   }, [controllerRef, dataset, plot, hidden, dark, ready]);
 

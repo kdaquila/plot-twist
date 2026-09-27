@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDateTime, needsScientific, numericTicks, timeTicks } from "./format";
+import { formatDateTime, formatExact, needsScientific, numericTicks, timeTicks } from "./format";
 
 // 2026-09-27T00:00:00Z
 const DAY = 1790467200;
@@ -49,5 +49,8 @@ describe("time labels (FR-006a, FR-009h)", () => {
   it("format the hover readout in full", () => {
     expect(formatDateTime(DAY + 60.125)).toBe("2026-09-27 00:01:00.125");
     expect(formatDateTime(DAY)).toBe("2026-09-27 00:00:00");
+    expect(formatDateTime(DAY + 1.000123)).toBe("2026-09-27 00:00:01.000123");
+    expect(formatExact(1015.2500000001)).toBe("1015.2500000001");
+    expect(formatExact(1.23456789e-7)).toBe("1.23456789e-7");
   });
 });

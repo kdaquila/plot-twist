@@ -13,24 +13,22 @@ export interface Draft {
 
 const fromPlot = (plot: PlotConfig): Draft => ({ x: plot.x, y: plot.y, style: plot.style });
 
-function initial(dataset: DatasetSummary | null): Draft {
-  const x = dataset?.columns.find((c) => c.usable_as_x)?.name ?? null;
-  return { x, y: [], style: "line" };
-}
+/** A new file starts with nothing selected (US1/AC8). */
+const EMPTY: Draft = { x: null, y: [], style: "line" };
 
 export function usePlotDraft(
   dataset: DatasetSummary | null,
   plot: PlotConfig | null,
   apply: (config: PlotConfig) => Promise<boolean>,
 ) {
-  const [draft, setDraft] = useState<Draft>(() => (plot ? fromPlot(plot) : initial(dataset)));
+  const [draft, setDraft] = useState<Draft>(() => (plot ? fromPlot(plot) : EMPTY));
   const [seen, setSeen] = useState({ dataset, plot });
 
   // Adopt a new dataset or a plot set elsewhere (e.g. by a script) during render.
   if (seen.dataset?.id !== dataset?.id || seen.plot !== plot) {
     setSeen({ dataset, plot });
     if (plot) setDraft(fromPlot(plot));
-    else if (seen.dataset?.id !== dataset?.id) setDraft(initial(dataset));
+    else if (seen.dataset?.id !== dataset?.id) setDraft(EMPTY);
   }
 
   const change = useCallback(

@@ -64,14 +64,23 @@ function timeLabel(date: Date): string {
   return formatYear(date);
 }
 
-const fullTime = utcFormat("%Y-%m-%d %H:%M:%S.%L");
+const fullSeconds = utcFormat("%Y-%m-%d %H:%M:%S");
 
-/** Full date-time for the hover readout. */
+/** Full date-time for the hover readout, down to microseconds when present. */
 export function formatDateTime(seconds: number): string {
-  return fullTime(new Date(seconds * 1000)).replace(/\.000$/, "");
+  let whole = Math.floor(seconds);
+  let micros = Math.round((seconds - whole) * 1e6);
+  if (micros === 1_000_000) {
+    whole += 1;
+    micros = 0;
+  }
+  const base = fullSeconds(new Date(whole * 1000));
+  if (micros === 0) return base;
+  const fraction = String(micros).padStart(6, "0").replace(/0+$/, "").padEnd(3, "0");
+  return `${base}.${fraction}`;
 }
 
-/** Exact value for the hover readout. */
+/** Exact value for the hover readout: the shortest text that reads back as the same number. */
 export function formatExact(value: number): string {
-  return needsScientific([value]) ? value.toExponential(6) : String(Number(value.toPrecision(12)));
+  return needsScientific([value]) ? value.toExponential() : String(value);
 }

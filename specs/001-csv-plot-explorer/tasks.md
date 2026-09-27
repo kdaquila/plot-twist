@@ -227,3 +227,9 @@ Task: "Create valid fixtures in fixtures/csv/"
 - Keep only acceptance-critical tests; delete throwaway tests before merge (Principle III)
 - No `unwrap`/`expect`/`panic!` outside tests (Principle V); generated TS types only (Principle II)
 - Commit after each task or logical group
+
+## Phase 7: Convergence
+
+- [X] T064 Derive the plot grid color from the active appearance (light/dark constants beside the palette in `ui/src/plot/legend/palette.ts`) instead of reading the `--grid` CSS variable in `ui/src/plot/PlotView.tsx`, so gridlines switch immediately with the theme per FR-010a (partial)
+- [X] T065 Show exact hover values in `ui/src/plot/axes/format.ts`: shortest round-trip number formatting (no 12-digit rounding or fixed exponent digits) and date-times with microseconds when present per FR-009b (partial)
+- [X] T066 Leave the X column unselected after a new file loads (no pre-selection) in `ui/src/data-panel/draft.ts` so the plot selection is cleared per US1/AC8 and FR-005a (contradicts)
