@@ -183,8 +183,9 @@ receives the same structured error information for a malformed file that the GUI
 - **Delimiters**: Comma, semicolon, and tab delimiters are detected automatically. Quoted
   fields (including quoted delimiters) are supported.
 - **Decimal separator**: Only `.` is accepted as the decimal separator; a value such as
-  `1,5` in a semicolon-delimited file is a bad cell (missing, and listed with its row and
-  column).
+  `1,5` in a numeric column of a semicolon-delimited file is a bad cell (missing, and
+  listed with its row and column). A column whose first value uses a decimal comma is a
+  text column.
 - **Encoding**: Files must be UTF-8 (with or without byte-order mark); invalid text
   encoding is reported with the row where it occurs.
 - **Unsorted X values**: In line style, points are connected in file order, not re-sorted

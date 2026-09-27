@@ -60,9 +60,11 @@ Response `200` — **LoadResult**:
     "delimiter": "comma",
     "columns": [
       {"index": 0, "name": "time", "kind": "datetime", "missing_count": 0,
-       "bad_cell_count": 0, "usable_as_x": true, "usable_as_y": false},
+       "bad_cell_count": 0, "usable_as_x": true, "usable_as_y": false,
+       "min": 1790000000.0, "max": 1790086399.0},
       {"index": 1, "name": "temp", "kind": "numeric", "missing_count": 3,
-       "bad_cell_count": 1, "usable_as_x": true, "usable_as_y": true}
+       "bad_cell_count": 1, "usable_as_x": true, "usable_as_y": true,
+       "min": 12.5, "max": 30.1}
     ],
     "bad_cell_total": 1
   },
@@ -106,7 +108,8 @@ Reduced render data for the current plot's series over the given range (same red
 GUI uses). `200`:
 
 ```json
-{"series": [{"column": "temp", "mode": "reduced", "points": [[x, y], [x, y], null, ...]}]}
+{"series": [{"column": "temp", "mode": "reduced", "y_min": 12.5, "y_max": 30.1,
+             "points": [[x, y], [x, y], null, ...]}]}
 ```
 
 `null` marks a line break (missing value). Requires a current plot → otherwise

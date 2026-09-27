@@ -30,6 +30,8 @@ u32 series_count
 repeat series_count:
   u32 column_index
   u8  mode            (0 = raw, 1 = reduced)
+  f64 y_min           min of the series within the requested X range (NaN if none)
+  f64 y_max
   u32 point_count
   f64 x[point_count]  interleaved with
   f64 y[point_count]  as [x0, y0, x1, y1, ...]; NaN y = line break

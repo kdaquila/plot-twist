@@ -1,0 +1,23 @@
+[package]
+name = "plot-twist-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+csv = "1.4.0"
+jiff = "0.2.37"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+tokio = { version = "1.53.1", features = ["sync"] }
+tracing = "0.1.44"
+ts-rs = { version = "12.0.1", features = ["serde-json-impl"] }
+
+[dev-dependencies]
+memory-stats = "1.2.0"
+tempfile = "3.27.0"

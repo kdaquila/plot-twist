@@ -4,3 +4,10 @@
 
 # Per-user Claude Code settings
 .claude/settings.local.json
+
+# Build output
+target/
+node_modules/
+dist/
+src-tauri/gen/
+fixtures/generated/
