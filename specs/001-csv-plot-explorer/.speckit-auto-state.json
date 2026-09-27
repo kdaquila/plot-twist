@@ -1,0 +1,136 @@
+{
+  "feature_directory": "specs/001-csv-plot-explorer",
+  "status": "in_progress",
+  "current_stage": "implement",
+  "completed_stages": [
+    "specify",
+    "clarify",
+    "plan",
+    "checklist",
+    "tasks",
+    "analyze"
+  ],
+  "converge_cycle": 0,
+  "pending_findings": [
+    {
+      "source": "clarify",
+      "id": "CL-6",
+      "text": "Ship an official Python client for the local API in v1, or document the raw protocol only?",
+      "asked": true,
+      "answer": "Documented HTTP+JSON protocol + stdlib Python example; no package"
+    },
+    {
+      "source": "clarify",
+      "id": "CL-7",
+      "text": "Log-scale axes in v1?",
+      "asked": true,
+      "answer": "No log axes in this feature"
+    },
+    {
+      "source": "clarify",
+      "id": "CL-8",
+      "text": "Ways to open a file beyond the dialog (drag-and-drop, command-line argument / Open-with)?",
+      "asked": true,
+      "answer": "Drag-and-drop + recent files (10); no CLI arg"
+    },
+    {
+      "source": "clarify",
+      "id": "CL-9",
+      "text": "Light/dark theme behavior?",
+      "asked": true,
+      "answer": "System default + Light/Dark/System override, remembered"
+    },
+    {
+      "source": "checklist",
+      "id": "CHK024",
+      "text": "Mouse gesture mapping: drag=pan + shift-drag=box zoom, vs Plotly-style drag=box zoom, vs toolbar modes",
+      "asked": true,
+      "answer": "Plotly-like: drag=box zoom, Shift/middle-drag=pan"
+    },
+    {
+      "source": "checklist",
+      "id": "CHK018",
+      "text": "Keep or reset zoom when Y columns change, style toggles, window resizes",
+      "asked": true,
+      "answer": "Keep X, refit Y on Y/style change; reset on X change; resize keeps"
+    },
+    {
+      "source": "checklist",
+      "id": "CHK006",
+      "text": "Can a long-running load be cancelled?",
+      "asked": true,
+      "answer": "No cancel in this feature; concurrent load refused"
+    },
+    {
+      "source": "analyze",
+      "id": "D1",
+      "text": "Constitution V: GUI must map codes to messages; plan has GUI display Rust-authored messages. Amend constitution vs generated code->template table.",
+      "asked": true,
+      "answer": "Amended constitution to v1.0.2: message text authored once in backend; GUI decides presentation"
+    },
+    {
+      "source": "analyze",
+      "id": "C2",
+      "text": "SC-005/SC-006 three-person usability checks: merge gate for this PR, or pre-release activity?",
+      "asked": true,
+      "answer": "Dropped SC-005/SC-006"
+    }
+  ],
+  "log": [
+    {
+      "stage": "start",
+      "at": "2026-09-27T00:00:00Z",
+      "note": "fresh start; created branch 001-csv-plot-explorer and feature dir"
+    },
+    {
+      "stage": "specify",
+      "at": "2026-09-27T00:10:00Z",
+      "note": "spec.md written, quality checklist all pass, 0 NEEDS CLARIFICATION. User asked to escalate product decisions more liberally for this first version."
+    },
+    {
+      "stage": "clarify",
+      "at": "2026-09-27T00:30:00Z",
+      "note": "5 Qs answered: bad cells->NaN+warnings; ISO 8601 date/time X; no decimal comma; hover/box zoom/legend toggle; one dataset at a time w/ dataset IDs. Auto-resolved: warning list shows total + every bad cell."
+    },
+    {
+      "stage": "clarify-findings",
+      "at": "2026-09-27T00:45:00Z",
+      "note": "4 extra product decisions answered and integrated into spec.md"
+    },
+    {
+      "stage": "plan",
+      "at": "2026-09-27T01:10:00Z",
+      "note": "User chose Tauri 2, React, custom PixiJS v8 renderer (not a chart lib), fixed port 47811 + api.json discovery. plan/research/data-model/contracts/quickstart written. Auto-decided: single-instance app, ts-rs, axum, csv+jiff, linear-scan min/max reduction, perf test target."
+    },
+    {
+      "stage": "checklist",
+      "at": "2026-09-27T01:25:00Z",
+      "note": "checklists/import-ux.md created, 36 items (focus: import & errors, plot UX). Starting finding resolution."
+    },
+    {
+      "stage": "checklist-resolution",
+      "at": "2026-09-27T01:40:00Z",
+      "note": "Auto-resolved 33/36 items via spec edits (edge cases, FR-005a-c, FR-009d-k, FR-012, FR-015, SC-005/006) and hint table in error-codes.md. Escalating CHK024, CHK018, CHK006."
+    },
+    {
+      "stage": "checklist-findings",
+      "at": "2026-09-27T01:50:00Z",
+      "note": "3 escalated items answered; import-ux.md 36/36"
+    },
+    {
+      "stage": "tasks",
+      "at": "2026-09-27T02:10:00Z",
+      "note": "tasks.md: 63 tasks (Setup 8, Foundational 10, US1 24, US2 7, US3 6, Polish 8)"
+    },
+    {
+      "stage": "analyze",
+      "at": "2026-09-27T02:25:00Z",
+      "note": "10 findings; auto-fixed I1,U1,U2,C1,I2,I3; A1,T1 accepted as-is; escalating D1 (CRITICAL), C2"
+    },
+    {
+      "stage": "analyze-findings",
+      "at": "2026-09-27T02:35:00Z",
+      "note": "D1 -> constitution 1.0.2; C2 -> SC-005/006 removed"
+    }
+  ]
+}
