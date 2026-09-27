@@ -33,6 +33,16 @@ This project is developed spec-first with [Spec Kit](https://github.com/github/s
 The project's principles, quality gates, and workflow are defined in the
 [constitution](.specify/memory/constitution.md).
 
+The Spec Kit agent commands are generated per machine and are not committed. After cloning,
+install the [Specify CLI](https://github.com/github/spec-kit) and run:
+
+```bash
+specify init --here --integration claude --script py
+```
+
+If it modifies any tracked files under `.specify/`, restore them with
+`git restore .specify` so the project's constitution and templates are kept.
+
 ## License
 
 Copyright (C) 2026 Kenneth D'Aquila

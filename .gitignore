@@ -1,0 +1,6 @@
+# Spec Kit agent skills are generated per machine (they embed local tool paths).
+# Recreate them with: specify init --here --integration claude --script py
+.claude/skills/
+
+# Per-user Claude Code settings
+.claude/settings.local.json
