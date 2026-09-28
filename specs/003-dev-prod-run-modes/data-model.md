@@ -15,7 +15,7 @@ Determined once at startup by `desktop/src/startup/dev_server.rs`.
 
 | State | Detected when | Window shows |
 |---|---|---|
-| `Ours` | A server at `devUrl` answers `GET /` with a page containing `<title>plot-twist</title>` | The app (unchanged) |
+| `Ours` | A server at `devUrl` answers `GET /` with a page containing `<title>plot-twist</title>`, or accepts but sends nothing within 2 s (too slow to judge; never block dev mode on a guess) | The app (unchanged) |
 | `Missing` | No address for `devUrl` accepts a connection within 300 ms | "The dev server is not running" + `npm run tauri dev` |
 | `Other` | A server answers but the page is not plot-twist's | "Port 5173 is used by another program" + close it, then `npm run tauri dev` |
 

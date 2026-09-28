@@ -1,7 +1,7 @@
 {
   "feature_directory": "specs/003-dev-prod-run-modes",
   "status": "in_progress",
-  "current_stage": "converge",
+  "current_stage": "pr",
   "completed_stages": [
     "specify",
     "clarify",
@@ -9,7 +9,8 @@
     "checklist",
     "tasks",
     "analyze",
-    "implement"
+    "implement",
+    "converge"
   ],
   "converge_cycle": 1,
   "pending_findings": [
@@ -72,6 +73,11 @@
       "stage": "implement",
       "at": "2026-09-28T00:25:00Z",
       "note": "T018 done: silent server -> leave page alone; throwaway tests passed and purged; Missing/Other re-verified."
+    },
+    {
+      "stage": "converge",
+      "at": "2026-09-28T00:30:00Z",
+      "note": "converged after cycle 1. data-model.md Ours row updated to match T018."
     }
   ]
 }
