@@ -65,3 +65,10 @@ Worktree removed afterwards.
 | `npm run check` | ok; 15 tests passed | same |
 | Perf | load 0.503 s, view 14.4 ms, memory 0.84× | load +3.1% (within 10%) |
 | `scripts/check-startup.ps1` | median 0.97 s | +2.1% (within 10%) |
+
+## Convergence fix (T018)
+
+A server that accepts but sends nothing before the read timeout is now left alone (treated as
+ours) rather than reported as another program. Throwaway probe tests (Ours, Other, Missing,
+silent server → left alone) passed and were deleted. Re-run of the debug exe: no server →
+`Missing`; Node server on 5173 → `Other`. fmt and clippy clean.

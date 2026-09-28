@@ -16,7 +16,7 @@ const OUR_TITLE: &str = "<title>plot-twist</title>";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum DevServer {
-    /// plot-twist's dev server answered.
+    /// plot-twist's dev server answered, or a server stayed silent (too slow to judge).
     Ours,
     /// Nothing is listening at the dev-server address.
     Missing,
@@ -73,7 +73,9 @@ fn probe(url: &Url) -> DevServer {
     for addr in addrs {
         match fetch_root(&addr, host, port) {
             None => {}
-            Some(page) if page.contains(OUR_TITLE) => return DevServer::Ours,
+            // No reply before the timeout: possibly our dev server, just slow. Never block
+            // dev mode on a guess; leave the page alone.
+            Some(page) if page.is_empty() || page.contains(OUR_TITLE) => return DevServer::Ours,
             Some(_) => state = DevServer::Other,
         }
     }
@@ -85,7 +87,7 @@ fn fetch_root(addr: &SocketAddr, host: &str, port: u16) -> Option<String> {
     let mut stream = TcpStream::connect_timeout(addr, CONNECT_TIMEOUT).ok()?;
     let mut reply = Vec::new();
     let request = format!("GET / HTTP/1.1\r\nHost: {host}:{port}\r\nConnection: close\r\n\r\n");
-    // A server that accepts but misbehaves is still "something else": keep what was read.
+    // On a write or read error (e.g. the read timeout), judge by whatever was read.
     let _ = stream.set_read_timeout(Some(READ_TIMEOUT));
     if stream.write_all(request.as_bytes()).is_ok() {
         let _ = stream.read_to_end(&mut reply);

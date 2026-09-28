@@ -88,3 +88,9 @@ T011 README dev/prod sections  |  T008 prod build verification (different files;
 
 MVP = Phase 1 + US1: the reported error is fixed and dev mode verified. Then US2 verifies prod
 mode, US3 documents both, and Phase 6 proves it all from a clean clone.
+
+---
+
+## Phase 7: Convergence
+
+- [X] T018 In desktop/src/startup/dev_server.rs, only classify a connection as `Other` when a non-empty reply arrived that lacks `<title>plot-twist</title>`; if the server accepts but sends nothing before the read timeout, leave the page alone (treat as ours) so a slow genuine dev server never gets the port message; re-run the Ours/Other/Missing throwaway probe tests plus a silent-server case, then delete them per FR-001 (partial)
