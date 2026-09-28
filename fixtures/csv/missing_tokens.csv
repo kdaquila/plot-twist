@@ -1,0 +1,14 @@
+a,b
+1,
+2,NaN
+3,nan
+4,NA
+5,n/a
+6,N/A
+7,#N/A
+8,null
+9,NULL
+10,None
+11,inf
+12,-inf
+13,42

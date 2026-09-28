@@ -1,0 +1,31 @@
+[package]
+name = "plot-twist"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "A free, open-source, modern data analysis GUI"
+
+[lib]
+name = "plot_twist_app"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[lints]
+workspace = true
+
+[dependencies]
+plot-twist-api = { version = "0.1.0", path = "../crates/api" }
+plot-twist-core = { version = "0.1.0", path = "../crates/core" }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+tauri = { version = "2.12.0", features = [] }
+tauri-plugin-dialog = "2.8.0"
+tauri-plugin-single-instance = "2.5.0"
+tokio = { version = "1.53.1", features = ["rt-multi-thread", "sync"] }
+tracing = "0.1.44"
+tracing-appender = "0.2.5"
+tracing-subscriber = { version = "0.3.23", features = ["json", "env-filter"] }
+
+[build-dependencies]
+tauri-build = { version = "2.7.0", features = [] }

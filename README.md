@@ -27,7 +27,48 @@ A Rust backend owns all data loading and processing. A TypeScript web frontend r
 what the backend sends. The GUI, local scripts, and AI agents are all equal clients of the
 same local API.
 
+## Scripting
+
+While the app is running, scripts can load files and set the plot through the local API.
+See [docs/local-api.md](docs/local-api.md).
+
 ## Development
+
+Prerequisites: [Rust](https://rustup.rs/) (the toolchain is pinned in `rust-toolchain.toml`),
+Node.js 24, and the [Tauri prerequisites for Windows](https://tauri.app/start/prerequisites/)
+(WebView2 is preinstalled on Windows 11).
+
+```bash
+npm ci
+```
+
+```bash
+npm run tauri dev
+```
+
+Before opening a pull request, run the same checks as CI:
+
+```bash
+cargo fmt --all --check
+```
+
+```bash
+cargo clippy --workspace --all-targets -- -D warnings
+```
+
+```bash
+cargo test --workspace
+```
+
+```bash
+npm run check
+```
+
+The performance test (1 million rows × 10 columns) runs in release mode:
+
+```bash
+cargo test -p plot-twist-core --release --test perf -- --ignored --nocapture
+```
 
 This project is developed spec-first with [Spec Kit](https://github.com/github/spec-kit).
 The project's principles, quality gates, and workflow are defined in the
