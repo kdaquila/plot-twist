@@ -27,6 +27,23 @@ A Rust backend owns all data loading and processing. A TypeScript web frontend r
 what the backend sends. The GUI, local scripts, and AI agents are all equal clients of the
 same local API.
 
+## Repository layout
+
+| Folder | Contents |
+|---|---|
+| `desktop/` | The desktop app: window, startup, and the bridge between the frontend and the backend |
+| `core/` | The data engine: CSV import, datasets, plot views, settings |
+| `api/` | The local HTTP API that scripts and AI agents use |
+| `ui/` | The frontend: toolbar, data panel, and the plot renderer |
+| `docs/` | User and scripting documentation |
+| `fixtures/` | Sample CSV files and example scripts used by tests and docs |
+| `scripts/` | Contributor scripts, such as the startup-time check |
+| `specs/` | Feature specifications, plans, and task lists |
+
+Every component has the same shape, `<component>/src/<area>/`, for example
+`core/src/csv_import/` and `ui/src/plot/`. Build output goes to `target/` (the frontend
+build to `target/ui/`) and dependencies to the root `node_modules/`.
+
 ## Scripting
 
 While the app is running, scripts can load files and set the plot through the local API.
@@ -45,6 +62,9 @@ npm ci
 ```bash
 npm run tauri dev
 ```
+
+If your checkout predates the current layout, delete the leftover `dist/`, `ui/node_modules/`,
+and `src-tauri/` folders; nothing uses them any more.
 
 Before opening a pull request, run the same checks as CI:
 

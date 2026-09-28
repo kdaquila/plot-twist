@@ -8,6 +8,5 @@
 # Build output
 target/
 node_modules/
-dist/
 desktop/gen/
 fixtures/generated/
