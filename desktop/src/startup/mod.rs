@@ -1,6 +1,7 @@
 //! App startup: logging, single instance, session, event forwarding, local API.
 
 mod api;
+mod dev_server;
 mod logging;
 mod paths;
 pub mod ready;
@@ -54,6 +55,7 @@ pub fn run() {
 
 fn setup(app: &mut App) {
     tracing::info!(version = env!("CARGO_PKG_VERSION"), "starting");
+    dev_server::check(app);
     let session = Arc::new(Session::new(SettingsStore::open(paths::settings_file())));
     events::forward_session_events(app.handle().clone(), &session);
     api::start(app.handle(), Arc::clone(&session));

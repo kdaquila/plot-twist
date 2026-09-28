@@ -55,16 +55,60 @@ Prerequisites: [Rust](https://rustup.rs/) (the toolchain is pinned in `rust-tool
 Node.js 24, and the [Tauri prerequisites for Windows](https://tauri.app/start/prerequisites/)
 (WebView2 is preinstalled on Windows 11).
 
+Install the dependencies once, from the repository root:
+
 ```bash
 npm ci
 ```
+
+If your checkout predates the current layout, delete the leftover `dist/`, `ui/node_modules/`,
+and `src-tauri/` folders; nothing uses them any more.
+
+### Dev mode
+
+Use dev mode while working on the app:
 
 ```bash
 npm run tauri dev
 ```
 
-If your checkout predates the current layout, delete the leftover `dist/`, `ui/node_modules/`,
-and `src-tauri/` folders; nothing uses them any more.
+This starts the frontend dev server and opens the app. Changes you save in `ui/` show up in
+the window straight away. Changes in `desktop/`, `api/`, or `core/` rebuild and restart the
+app. Press Ctrl+C in the terminal to stop.
+
+### Prod mode
+
+Use prod mode to get the app as a user would: optimized, self-contained, and without a dev
+server.
+
+```bash
+npm run tauri build
+```
+
+This writes two things:
+
+- the installer: `target/release/bundle/nsis/plot-twist_<version>_x64-setup.exe`
+- the standalone app: `target/release/plot-twist.exe`, which you can run directly
+
+To build only the standalone app, which is quicker:
+
+```bash
+npm run tauri build -- --no-bundle
+```
+
+### Troubleshooting
+
+- **"The dev server is not running"** (or, on older checkouts, "Hmmm… can't reach this
+  page"): the app was started with `cargo run`, which does not start the frontend dev server.
+  Close the window and use `npm run tauri dev`.
+- **"Port 5173 is already in use"**: another program is using the dev server's port. Close
+  that program, then run `npm run tauri dev` again.
+- **A compile error while you edit**: dev mode rebuilds on every save, so a half-finished
+  edit can fail to compile. Keep editing; the next save that compiles rebuilds and restarts
+  the app.
+- **Nothing seems to happen when the app starts**: plot-twist runs one copy at a time, and a
+  copy that is already running (from dev mode, prod mode, or an installed copy) comes to the
+  front instead. Close it first.
 
 Before opening a pull request, run the same checks as CI:
 
