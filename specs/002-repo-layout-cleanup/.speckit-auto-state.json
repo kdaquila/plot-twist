@@ -1,7 +1,7 @@
 {
   "feature_directory": "specs/002-repo-layout-cleanup",
-  "status": "in_progress",
-  "current_stage": "pr",
+  "status": "done",
+  "current_stage": "done",
   "completed_stages": [
     "specify",
     "clarify",
@@ -10,7 +10,8 @@
     "tasks",
     "analyze",
     "implement",
-    "converge"
+    "converge",
+    "pr"
   ],
   "converge_cycle": 0,
   "pending_findings": [],
@@ -64,6 +65,11 @@
       "stage": "converge",
       "at": "2026-09-27T21:35:00Z",
       "note": "converged on cycle 0: all FR/SC/US/plan/constitution items met; tasks.md unchanged"
+    },
+    {
+      "stage": "pr",
+      "at": "2026-09-27T21:45:00Z",
+      "note": "opened https://github.com/kdaquila/plot-twist/pull/2"
     }
   ]
 }
