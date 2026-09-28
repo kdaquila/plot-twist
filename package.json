@@ -17,7 +17,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "bindings": "cargo test -p plot-twist-core --lib export_bindings --quiet",
-    "bindings:check": "npm run bindings && git diff --exit-code -- ui/src/backend/generated",
+    "bindings:check": "npm run bindings && git add --intent-to-add -- ui/src/backend/generated && git diff --exit-code -- ui/src/backend/generated",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run bindings:check"
   },
   "dependencies": {

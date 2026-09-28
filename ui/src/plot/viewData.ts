@@ -1,6 +1,6 @@
 // Schedules backend view requests: at most one in flight, at most one every 100 ms during
 // continuous motion, and a final request 50 ms after the view settles (research R4).
-import { BackendError, getView } from "../backend/commands";
+import { getView, toBackendError, type BackendError } from "../backend/commands";
 import type { ViewRequest } from "../backend/generated/ViewRequest";
 import { decodeViewPayload, type SeriesPayload } from "../backend/viewPayload";
 
@@ -50,7 +50,7 @@ export class ViewFetcher {
         if (!this.stopped) this.onData(request, decodeViewPayload(buffer));
       })
       .catch((error: unknown) => {
-        if (!this.stopped && error instanceof BackendError) this.onError(error);
+        if (!this.stopped) this.onError(toBackendError(error));
       })
       .finally(() => {
         this.inFlight = false;

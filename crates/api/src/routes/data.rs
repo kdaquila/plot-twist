@@ -124,20 +124,11 @@ pub async fn view(
         height_px: q.height,
     };
     let payload = state.session.view(&request)?;
-    let columns = state
-        .session
-        .state()
-        .dataset
-        .map(|d| d.columns)
-        .unwrap_or_default();
     let series = payload
         .series
         .into_iter()
         .map(|s| SeriesResponse {
-            column: columns
-                .get(s.column.0 as usize)
-                .map(|c| c.name.clone())
-                .unwrap_or_default(),
+            column: s.name,
             mode: match s.mode {
                 ViewMode::Raw => "raw",
                 ViewMode::Reduced => "reduced",

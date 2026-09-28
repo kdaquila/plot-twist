@@ -42,8 +42,10 @@ pub fn run() {
         .build(tauri::generate_context!());
     match built {
         Ok(app) => app.run(|app, event| {
-            if let RunEvent::Exit = event {
-                app.state::<ApiState>().stop();
+            if let RunEvent::Exit = event
+                && let Some(api) = app.try_state::<ApiState>()
+            {
+                api.stop();
             }
         }),
         Err(error) => tracing::error!(%error, "could not start plot-twist"),

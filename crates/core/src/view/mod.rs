@@ -42,6 +42,8 @@ pub enum ViewMode {
 #[derive(Debug, Clone, PartialEq)]
 pub struct SeriesView {
     pub column: ColumnIndex,
+    /// The column's display name, from the same dataset that produced the points.
+    pub name: String,
     pub mode: ViewMode,
     pub y_extent: Option<(f64, f64)>,
     pub points: Vec<f64>,
@@ -142,6 +144,7 @@ pub fn reduce(
         };
         SeriesView {
             column: column.index,
+            name: column.name.clone(),
             mode,
             y_extent: scan.y_extent,
             points,
@@ -156,20 +159,15 @@ pub fn reduce(
             .into_iter()
             .zip(&columns)
             .map(|(handle, &column)| match handle {
-                Ok(handle) => handle.join().map_err(|_| internal("view worker failed")),
+                Ok(handle) => handle
+                    .join()
+                    .map_err(|_| PtError::internal(&"view worker failed")),
                 // Could not start a thread: do the work here instead.
                 Err(_) => Ok(one(column)),
             })
             .collect::<Result<Vec<_>, PtError>>()
     })?;
     Ok(ViewPayload { series })
-}
-
-fn internal(reason: &str) -> PtError {
-    tracing::error!(reason, "view reduction failed");
-    PtError::Internal {
-        log_id: format!("view-{}", std::process::id()),
-    }
 }
 
 /// One pass over a series: visible counts (by X, and by X and Y) and the Y extent within

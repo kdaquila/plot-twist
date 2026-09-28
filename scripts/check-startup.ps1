@@ -24,6 +24,11 @@ if (-not $SkipBuild) {
 $exe = Join-Path $root "target\release\plot-twist.exe"
 if (-not (Test-Path $exe)) { throw "not found: $exe" }
 
+# A running copy would receive each launch (single instance) and nothing would be measured.
+if (Get-Process -Name plot-twist -ErrorAction SilentlyContinue) {
+    throw "plot-twist is already running; close it before checking startup time"
+}
+
 $env:PLOT_TWIST_EXIT_WHEN_READY = "1"
 $times = @()
 # The first launch warms WebView2 and the disk cache; it is not counted.

@@ -1,6 +1,7 @@
 // X / Y / style selection (FR-006, FR-008) with each column's type and missing count (FR-003).
 import type { ColumnInfo } from "../backend/generated/ColumnInfo";
 import type { Draft } from "./draft";
+import { formatCount } from "./format";
 
 interface Props {
   columns: ColumnInfo[];
@@ -64,7 +65,7 @@ export function ColumnPicker({ columns, draft, onChange }: Props) {
               <span className="tag">{KIND_LABEL[c.kind]}</span>
               {c.missing_count > 0 && (
                 <span className="tag" title="Empty, missing-value, or bad cells">
-                  {c.missing_count.toLocaleString("en-US")} missing
+                  {formatCount(c.missing_count)} missing
                 </span>
               )}
             </label>

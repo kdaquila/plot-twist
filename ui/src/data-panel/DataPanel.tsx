@@ -4,6 +4,7 @@ import type { DatasetSummary } from "../backend/generated/DatasetSummary";
 import { BadCells } from "./BadCells";
 import { ColumnPicker } from "./ColumnPicker";
 import type { Draft } from "./draft";
+import { formatCount } from "./format";
 
 interface Props {
   dataset: DatasetSummary | null;
@@ -26,7 +27,7 @@ export function DataPanel({ dataset, draft, onDraft, onError }: Props) {
     <aside className="data-panel" aria-label="Data">
       <h2 title={dataset.path}>{dataset.file_name}</h2>
       <div className="meta">
-        {dataset.row_count.toLocaleString("en-US")} rows · {dataset.columns.length} columns ·{" "}
+        {formatCount(dataset.row_count)} rows · {dataset.columns.length} columns ·{" "}
         {DELIMITER[dataset.delimiter]}-separated{dataset.has_header ? "" : " · no header row"}
       </div>
       <BadCells key={dataset.id} dataset={dataset} onError={onError} />

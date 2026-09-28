@@ -51,6 +51,8 @@ export class PlotController {
     gridColor: "#e5e5e5",
   };
   private slots = new Map<string, number>();
+  /** The plot each in-flight request was made for; responses for another plot are dropped. */
+  private requestedFor = new WeakMap<ViewRequest, PlotConfig>();
   private range: view.Range | null = null;
   private full: view.Range | null = null;
   private refitY = false;
@@ -227,7 +229,7 @@ export class PlotController {
     const { dataset, plot } = this.inputs;
     if (!dataset || !plot || !this.range) return null;
     const clampPx = (v: number) => Math.min(MAX_PIXELS, Math.max(1, Math.round(v)));
-    return {
+    const request: ViewRequest = {
       dataset_id: dataset.id,
       x_min: this.range.xMin,
       x_max: this.range.xMax,
@@ -236,11 +238,14 @@ export class PlotController {
       width_px: clampPx(this.width),
       height_px: clampPx(this.height),
     };
+    this.requestedFor.set(request, plot);
+    return request;
   }
 
   private receive(request: ViewRequest, series: SeriesPayload[]) {
     const plot = this.inputs.plot;
-    if (!plot || request.dataset_id !== this.inputs.dataset?.id) return;
+    // A response for a replaced plot is dropped; the fetch queued by update() follows.
+    if (!plot || this.requestedFor.get(request) !== plot) return;
     this.payload = {
       series,
       origin: { x: (request.x_min + request.x_max) / 2, y: (request.y_min + request.y_max) / 2 },

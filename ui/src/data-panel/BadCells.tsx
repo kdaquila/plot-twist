@@ -4,9 +4,9 @@ import { useRef, useState } from "react";
 import { getBadCells, toBackendError, type BackendError } from "../backend/commands";
 import type { BadCellPage } from "../backend/generated/BadCellPage";
 import type { DatasetSummary } from "../backend/generated/DatasetSummary";
+import { formatCount as count } from "./format";
 
 const PAGE = 100;
-const count = (n: number) => n.toLocaleString("en-US");
 
 interface Props {
   dataset: DatasetSummary;
