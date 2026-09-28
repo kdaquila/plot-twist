@@ -9,7 +9,7 @@ use plot_twist_core::dataset::{Column, ColumnKind, Delimiter, Table};
 
 fn fixture(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../fixtures/csv")
+        .join("../fixtures/csv")
         .join(name)
 }
 

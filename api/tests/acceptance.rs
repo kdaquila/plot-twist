@@ -57,7 +57,7 @@ impl Api {
 
 fn fixture(name: &str) -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../../fixtures/csv")
+        .join("../fixtures/csv")
         .join(name)
         .canonicalize()
         .unwrap()
