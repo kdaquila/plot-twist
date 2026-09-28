@@ -1,14 +1,15 @@
 {
   "feature_directory": "specs/003-dev-prod-run-modes",
   "status": "in_progress",
-  "current_stage": "implement",
+  "current_stage": "converge",
   "completed_stages": [
     "specify",
     "clarify",
     "plan",
     "checklist",
     "tasks",
-    "analyze"
+    "analyze",
+    "implement"
   ],
   "converge_cycle": 0,
   "pending_findings": [
@@ -56,6 +57,11 @@
       "stage": "analyze",
       "at": "2026-09-27T23:40:00Z",
       "note": "2 findings. C1 CRITICAL Constitution III: change validated only manually -> added T017 throwaway automated probe tests (purged before merge), plan III row updated. A1 LOW FR-003 localhost-only not enforced -> T002/plan: probe only loopback devUrl hosts. Coverage 15/15 requirements. None escalated."
+    },
+    {
+      "stage": "implement",
+      "at": "2026-09-28T00:10:00Z",
+      "note": "All 17 tasks done. Baseline main: 48+1 ignored / 15, load 0.488 s, startup 0.95 s. After: same counts, load 0.503 s (+3.1%), startup 0.97 s (+2.1%). Dev, prod (exe + installer + no-bundle), clean clone verified; results in verification.md."
     }
   ]
 }

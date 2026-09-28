@@ -39,3 +39,29 @@ both families → `Ours`, and loopback-host guard). All passed; module deleted a
 | T008 run the exe, nothing on port 5173 | App window; `load_and_plot.py … time temp pressure` loaded 240 rows and plotted (screenshot); 0 dev-server log lines (check skipped in prod builds) |
 | T009 installer (`/S`, per-user) | Installed to `%LOCALAPPDATA%\plot-twist\` with a Start menu shortcut; started from the shortcut, ran from the installed path; script loaded and plotted humidity; `uninstall.exe /S` removed the exe and the shortcut (logs and `api.json`, which are user data, remain) |
 | T010 `npm run tauri build -- --no-bundle` | `target/release/plot-twist.exe` only; no `bundle/` folder |
+
+## Clean clone (T014)
+
+`git worktree add --detach ../pt-verify HEAD` at 8fbbb58: no `node_modules/`, no `target/`.
+Followed only the README.
+
+| Step | Result |
+|---|---|
+| `npm ci` | 235 packages |
+| `npm run tauri dev` | first build 1m 55s; app window, log `state: Ours`, `ready`; `load_and_plot.py` plotted temp and pressure |
+| `npm run tauri build` | exe and `plot-twist_0.1.0_x64-setup.exe` (2.81 MiB) |
+| Run `target/release/plot-twist.exe`, nothing on port 5173 | script plotted temp and pressure |
+
+Worktree removed afterwards.
+
+## CI sequence and budgets (T015)
+
+| Check | Result | vs baseline |
+|---|---|---|
+| `npm run build` | ok | — |
+| `cargo fmt --all --check` | ok | — |
+| `cargo clippy --workspace --all-targets -D warnings` | ok | — |
+| `cargo test --workspace` | 48 passed, 1 ignored | same |
+| `npm run check` | ok; 15 tests passed | same |
+| Perf | load 0.503 s, view 14.4 ms, memory 0.84× | load +3.1% (within 10%) |
+| `scripts/check-startup.ps1` | median 0.97 s | +2.1% (within 10%) |

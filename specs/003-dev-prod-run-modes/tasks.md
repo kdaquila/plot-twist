@@ -64,8 +64,8 @@ No shared prerequisites beyond Phase 1: US1's code change and US2's verification
 
 ## Phase 6: Polish & Cross-Cutting
 
-- [ ] T014 In a fresh `git worktree add ../pt-verify 003-dev-prod-run-modes` (clean clone: no node_modules/, no target/), follow only the README: `npm ci`, dev mode (load, plot, script), prod mode (`npm run tauri build`, run the exe with no dev server); record each step and result in specs/003-dev-prod-run-modes/verification.md; remove the worktree afterwards (FR-009, SC-001, SC-002)
-- [ ] T015 Run the full CI sequence from .github/workflows/ci.yml locally (npm run build, cargo fmt, clippy, cargo test, npm run check, perf test, scripts/check-startup.ps1); record counts and numbers in verification.md and confirm test counts equal T001 and perf/startup are within 10% (FR-010, SC-005)
+- [X] T014 In a fresh `git worktree add ../pt-verify 003-dev-prod-run-modes` (clean clone: no node_modules/, no target/), follow only the README: `npm ci`, dev mode (load, plot, script), prod mode (`npm run tauri build`, run the exe with no dev server); record each step and result in specs/003-dev-prod-run-modes/verification.md; remove the worktree afterwards (FR-009, SC-001, SC-002)
+- [X] T015 Run the full CI sequence from .github/workflows/ci.yml locally (npm run build, cargo fmt, clippy, cargo test, npm run check, perf test, scripts/check-startup.ps1); record counts and numbers in verification.md and confirm test counts equal T001 and perf/startup are within 10% (FR-010, SC-005)
 - [X] T016 Search README.md and docs/ for other instructions to start the app (e.g. `cargo run`, `tauri dev`) and align them with the new sections
 
 ---
