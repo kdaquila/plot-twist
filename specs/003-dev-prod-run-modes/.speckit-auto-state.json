@@ -1,7 +1,7 @@
 {
   "feature_directory": "specs/003-dev-prod-run-modes",
-  "status": "in_progress",
-  "current_stage": "pr",
+  "status": "done",
+  "current_stage": "done",
   "completed_stages": [
     "specify",
     "clarify",
@@ -10,7 +10,8 @@
     "tasks",
     "analyze",
     "implement",
-    "converge"
+    "converge",
+    "pr"
   ],
   "converge_cycle": 1,
   "pending_findings": [
@@ -78,6 +79,11 @@
       "stage": "converge",
       "at": "2026-09-28T00:30:00Z",
       "note": "converged after cycle 1. data-model.md Ours row updated to match T018."
+    },
+    {
+      "stage": "pr",
+      "at": "2026-09-28T00:35:00Z",
+      "note": "Opened https://github.com/kdaquila/plot-twist/pull/3. Not merged (needs user go-ahead)."
     }
   ]
 }
