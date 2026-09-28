@@ -1,0 +1,61 @@
+{
+  "feature_directory": "specs/003-dev-prod-run-modes",
+  "status": "in_progress",
+  "current_stage": "implement",
+  "completed_stages": [
+    "specify",
+    "clarify",
+    "plan",
+    "checklist",
+    "tasks",
+    "analyze"
+  ],
+  "converge_cycle": 0,
+  "pending_findings": [
+    {
+      "source": "specify",
+      "id": "FR-003",
+      "text": "What should `cargo run` (dev build without the dev server) do instead of showing the browser error page: (A) in-window message pointing to `npm run tauri dev`, (B) fall back to the last frontend build, or (C) README-only?",
+      "recommendation": "A",
+      "asked": true,
+      "answer": "A: in-window message naming `npm run tauri dev`"
+    }
+  ],
+  "log": [
+    {
+      "stage": "specify",
+      "at": "2026-09-27T23:00:00Z",
+      "note": "Created specs/003-dev-prod-run-modes on branch 003-dev-prod-run-modes (spec written by a standalone /speckit-specify run of the same prompt, adopted by speckit-auto). Reproduced: `npm run tauri dev` works; `cargo run` shows 'can't reach this page'. One NEEDS CLARIFICATION (FR-003) is a product call, escalated."
+    },
+    {
+      "stage": "specify",
+      "at": "2026-09-27T23:05:00Z",
+      "note": "User answered FR-003: A. Spec updated (Clarifications, FR-003, US1/AC4, SC-003); checklist all pass."
+    },
+    {
+      "stage": "clarify",
+      "at": "2026-09-27T23:08:00Z",
+      "note": "No critical ambiguities; all taxonomy categories Clear; 0 questions; no Deferred/Outstanding items. Checklist 16/16."
+    },
+    {
+      "stage": "plan",
+      "at": "2026-09-27T23:20:00Z",
+      "note": "plan.md, research.md (R1-R6), data-model.md, contracts/run-commands.md, quickstart.md. Found and designed for: port-5173-taken leaves an orphan window showing the other program's page (R3); FR-008 refined. Prototype desktop/src/startup/dev_server.rs (Missing path) verified by screenshot."
+    },
+    {
+      "stage": "checklist",
+      "at": "2026-09-27T23:30:00Z",
+      "note": "checklists/run-modes.md, 19 items. 13 gaps resolved by spec edits (FR-003, FR-005, FR-006, FR-007, FR-009, SC-005, US2 AC1/AC3, edge case, Key Entities, Assumptions); 6 already satisfied. None escalated."
+    },
+    {
+      "stage": "tasks",
+      "at": "2026-09-27T23:35:00Z",
+      "note": "tasks.md: 16 tasks (Setup 1, US1 6, US2 3, US3 3, Polish 3)."
+    },
+    {
+      "stage": "analyze",
+      "at": "2026-09-27T23:40:00Z",
+      "note": "2 findings. C1 CRITICAL Constitution III: change validated only manually -> added T017 throwaway automated probe tests (purged before merge), plan III row updated. A1 LOW FR-003 localhost-only not enforced -> T002/plan: probe only loopback devUrl hosts. Coverage 15/15 requirements. None escalated."
+    }
+  ]
+}
